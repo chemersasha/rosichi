@@ -1,0 +1,12 @@
+.form-content {
+  width: 560px;
+}
+.container {
+  max-width: 500px;
+}
+.form {
+  max-width: 560px;
+}
+.form button {
+  width: 100px;
+}
