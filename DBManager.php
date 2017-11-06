@@ -12,9 +12,23 @@ class DBManager {
     mysqli_select_db($this->connection, $dbname);
   }
 
-  function runQuery($query) {
-    $qry_result = mysqli_query($this->connection, $query);
-    return mysqli_fetch_array($qry_result);
+  function runSelectQuery($query) {
+    $result = mysqli_query($this->connection, $query);
+    if (!$result) {
+      $message  = 'Wrong query: '.mysqli_error($this->connection)."\n";
+      $message .= 'Query: '.$query;
+      die($message);
+    }
+    return mysqli_fetch_array($result);
+  }
+
+  function runInsertQuery($query) {
+    $result = mysqli_query($this->connection, $query);
+    if (!$result) {
+      $message  = 'Wrong query: '.mysqli_error($this->connection)."\n";
+      $message .= 'Query: '.$query;
+      die($message);
+    }
   }
 
   function closeConnection() {
