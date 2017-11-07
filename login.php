@@ -7,7 +7,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
   $DBManager = new DBManager();
   $DBManager->openConnection();
   $username = $_POST['username'];
-  $user = $DBManager->runSelectQuery("SELECT * FROM users WHERE name='$username'");
+  $user = mysqli_fetch_array($DBManager->runSelectQuery("SELECT * FROM users WHERE name='$username'"));
   $DBManager->closeConnection();
 
   if (md5($_POST['password']) == $user['pass']) {

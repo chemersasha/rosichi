@@ -12,7 +12,7 @@ if(!isset($_SESSION['valid'])) {
 
     $clientid = $_POST['clientid'];
     $client = $DBManager->runSelectQuery("SELECT * FROM clients WHERE id='$clientid'");
-    if ($client) {
+    if (mysqli_fetch_array($client)) {
       $msg = 'Client with id '.$clientid.' is exist';
     } else {
       $firstname = $_POST['firstname'];
@@ -20,6 +20,7 @@ if(!isset($_SESSION['valid'])) {
       $DBManager->runInsertQuery(
         "INSERT INTO clients (id, firstname, lastname) VALUES ($clientid, '$firstname', '$lastname');"
       );
+      //@TODO go to the edit client page
       $DBManager->closeConnection();
       header("Location: index.php");
       exit();
@@ -34,14 +35,12 @@ if(!isset($_SESSION['valid'])) {
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/addclient.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
-  <div style="display:block; margin:5px;">
-    <!-- <a style="float:left;" href="adminroom.php">Go back</a> -->
-    <a style="float:right;" href="logout.php">
-      <span class="glyphicon glyphicon-log-out"></span>
+  <div class="toppanel">
+    <a class="logout" href="logout.php">
+      <img src="css/img/logout.png"/>
     </a>
   </div>
 

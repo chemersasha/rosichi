@@ -1,5 +1,12 @@
-.addclient {
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
+a.addclient {
+  height: 32px;
+  width: 32px
+}
+a.addclient img {
+  height: 32px;
+  width: 32px
+}
+a.addclient img:hover {
+  height: 31px;
+  width: 31px
 }

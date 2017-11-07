@@ -10,3 +10,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+div.toppanel {
+  display: block;
+  height: 32px;
+}
+/* logout style */
+a.logout {
+  float: right;
+}
+a.logout img {
+  height: 32px;
+  width: 32px;
+}
+a.logout img:hover {
+  height: 31px;
+  width: 31px;
+}

@@ -19,7 +19,7 @@ class DBManager {
       $message .= 'Query: '.$query;
       die($message);
     }
-    return mysqli_fetch_array($result);
+    return $result;
   }
 
   function runInsertQuery($query) {
