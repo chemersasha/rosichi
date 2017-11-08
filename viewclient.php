@@ -51,7 +51,8 @@ if(!isset($_SESSION['valid'])) {
           <td>SECTION:</td><td><?php echo $client['section']?></td>
         </tr>
       </table>
-        <button name="Cancel" onclick="location.href='adminroom.php'; return false;">Back</button>
+      <br/>
+      <button name="Cancel" onclick="location.href='adminroom.php'; return false;">Back</button>
     </div>
   </div>
 </body>

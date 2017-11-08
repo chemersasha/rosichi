@@ -56,11 +56,19 @@
 .form .register-form {
   display: none;
 }
+.form table {
+  width: 100%;
+}
 .form td:first-child {
   font-weight: bold;
+  width: 110px;
+  padding: 5px;
 }
 .form td:last-child {
-  padding-left: 10px;
+  padding: 5px;
+}
+.form tr:nth-child(odd) td {
+  background:#EBEBEB;
 }
 .container {
   position: relative;
