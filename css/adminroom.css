@@ -10,3 +10,8 @@ a.addclient img:hover {
   height: 31px;
   width: 31px
 }
+
+a.editclient img {
+  height: 32px;
+  width: 32px
+}

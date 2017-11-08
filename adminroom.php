@@ -31,17 +31,19 @@ if(!isset($_SESSION['valid'])) {
   <table class="table-fill">
     <thead><tr>
       <th>Client id</th>
-      <th>First name</th>
-      <th>Last name</th>
+      <th>Name</th>
+      <th style="width:32px;"></th>
+      <th style="width:32px;"></th>
     </tr></thead>
     <tbody class="table-hover">
     <?php
       while ($client = mysqli_fetch_assoc($clients)) {
-        echo "<tr>";
-        echo "<td>".$client['id']."</td>";
-        echo "<td>".$client['firstname']."</td>";
-        echo "<td>".$client['lastname']."</td>";
-        echo "</tr>";
+        echo '<tr>';
+        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['id'].'</td>';
+        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['firstname'].' '.$client['lastname'].'</td>';
+        echo '<td><a class="editclient" href="editclient.php?id='.$client['id'].'"><img src="css/img/edit.png"/></td>';
+        echo '<td>remove</td>';
+        echo '</tr>';
       }
     ?>
     </tbody>

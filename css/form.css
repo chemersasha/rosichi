@@ -1,6 +1,5 @@
 .form-content {
   width: 360px;
-  padding: 8% 0 0;
   margin: auto;
 }
 .form {
@@ -12,6 +11,10 @@
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form .title {
+  text-align:left;
+  font-weight: bold;
 }
 .form input {
   font-family: "Roboto", sans-serif;
@@ -52,6 +55,12 @@
 }
 .form .register-form {
   display: none;
+}
+.form td:first-child {
+  font-weight: bold;
+}
+.form td:last-child {
+  padding-left: 10px;
 }
 .container {
   position: relative;

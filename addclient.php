@@ -51,11 +51,11 @@ if(!isset($_SESSION['valid'])) {
         <div style="display:inline-block;">Client id:</div>
         <input type="text" name="clientid" placeholder="client id" required autofocus></br>
         <div style="display:inline-block;">First name:</div>
-        <input type="text" name="firstname" placeholder="first name" required autofocus></br>
+        <input type="text" name="firstname" placeholder="first name" required></br>
         <div style="display:inline-block;">Last name:</div>
-        <input type="text" name="lastname" placeholder="last name" required autofocus></br>
+        <input type="text" name="lastname" placeholder="last name" required></br>
         <button type="submit" name="Add">Add</button>
-        <button name="Cencel" onclick="location.href='adminroom.php';">Cancel</button>
+        <button name="Cancel" onclick="location.href='adminroom.php'; return false;">Cancel</button>
       </form>
     </div>
   </div>
