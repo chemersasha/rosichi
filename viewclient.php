@@ -10,6 +10,9 @@ if(!isset($_SESSION['valid'])) {
   $DBManager->openConnection();
   $client = mysqli_fetch_array($DBManager->runSelectQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
   $DBManager->closeConnection();
+
+  $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));
+  $convertedDateTo = date("d/m/Y", strtotime($client['dateto']));
 ?>
 <html lang = "en">
 <head>
@@ -39,10 +42,10 @@ if(!isset($_SESSION['valid'])) {
           <td>LAST NAME:</td><td><?php echo $client['lastname']?></td>
         </tr>
         <tr>
-          <td>DATE FROM:</td><td><?php echo $client['datefrom']?></td>
+          <td>DATE FROM:</td><td><?php echo $convertedDateFrom?></td>
         </tr>
         <tr>
-          <td>DATE TO:</td><td><?php echo $client['dateto']?></td>
+          <td>DATE TO:</td><td><?php echo $convertedDateTo?></td>
         </tr>
         <tr>
           <td>VISITS:</td><td><?php echo $client['visits']?></td>
