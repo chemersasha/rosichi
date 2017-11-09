@@ -8,7 +8,7 @@ if(!isset($_SESSION['valid'])) {
   $clientid = $_GET['id'];
   $DBManager = new DBManager();
   $DBManager->openConnection();
-  $client = mysqli_fetch_array($DBManager->runSelectQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
+  $client = mysqli_fetch_array($DBManager->runQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
   $DBManager->closeConnection();
 
   $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));

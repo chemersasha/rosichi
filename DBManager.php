@@ -16,7 +16,7 @@ class DBManager {
     mysqli_select_db($this->connection, $dbname);
   }
 
-  function runSelectQuery($query) {
+  function runQuery($query) {
     $result = mysqli_query($this->connection, $query);
     if (!$result) {
       $message  = 'Wrong query: '.mysqli_error($this->connection)."\n";
@@ -24,15 +24,6 @@ class DBManager {
       die($message);
     }
     return $result;
-  }
-
-  function runInsertQuery($query) {
-    $result = mysqli_query($this->connection, $query);
-    if (!$result) {
-      $message  = 'Wrong query: '.mysqli_error($this->connection)."\n";
-      $message .= 'Query: '.$query;
-      die($message);
-    }
   }
 
   function closeConnection() {

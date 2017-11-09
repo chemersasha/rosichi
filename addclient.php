@@ -11,13 +11,13 @@ if(!isset($_SESSION['valid'])) {
     $DBManager->openConnection();
 
     $clientid = $_POST['clientid'];
-    $client = $DBManager->runSelectQuery("SELECT * FROM clients WHERE id='$clientid'");
+    $client = $DBManager->runQuery("SELECT * FROM clients WHERE id='$clientid'");
     if (mysqli_fetch_array($client)) {
       $msg = 'Client with id '.$clientid.' is exist';
     } else {
       $firstname = $_POST['firstname'];
       $lastname = $_POST['lastname'];
-      $DBManager->runInsertQuery(
+      $DBManager->runQuery(
         "INSERT INTO clients (id, firstname, lastname) VALUES ($clientid, '$firstname', '$lastname');"
       );
       //@TODO go to the edit client page

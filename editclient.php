@@ -17,14 +17,14 @@ if(!isset($_SESSION['valid'])) {
     $newvisits = $_POST['visits'];
     $newsection = $_POST['section'];
 
-    $DBManager->runInsertQuery(
+    $DBManager->runQuery(
       "UPDATE clients SET firstname='$newfirstname', lastname='$newlastname', datefrom='$newdatefrom', dateto='$newdateto', visits='$newvisits', section='$newsection' WHERE id=$newclientid;"
     );
     header("Location: viewclient.php?id=".$_POST['clientid']);
     exit();
   }
   $clientid = $_GET['id'];
-  $client = mysqli_fetch_array($DBManager->runSelectQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
+  $client = mysqli_fetch_array($DBManager->runQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
   $DBManager->closeConnection();
 
   $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));

@@ -1,17 +1,23 @@
 a.addclient {
   height: 32px;
-  width: 32px
+  width: 32px;
 }
 a.addclient img {
   height: 32px;
-  width: 32px
+  width: 32px;
 }
 a.addclient img:hover {
   height: 31px;
-  width: 31px
+  width: 31px;
 }
 
-a.editclient img {
+a.editclient img{
   height: 32px;
-  width: 32px
+  width: 32px;
+}
+
+a.removeclient img {
+  height: 32px;
+  width: 32px;
+  cursor: hand;
 }

@@ -7,7 +7,7 @@ if(!isset($_SESSION['valid'])) {
 } else {
   $DBManager = new DBManager();
   $DBManager->openConnection();
-  $clients = $DBManager->runSelectQuery("SELECT * FROM clients");
+  $clients = $DBManager->runQuery("SELECT * FROM clients");
   $DBManager->closeConnection();
 ?>
 <html lang = "en">
@@ -16,6 +16,38 @@ if(!isset($_SESSION['valid'])) {
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/adminroom.css">
   <link rel="stylesheet" href="css/tableList.css">
+  <link rel="stylesheet" href="jquery/jquery-ui.min.css">
+
+  <script src="jquery/external/jquery/jquery.js"></script>
+  <script src="jquery/jquery-ui.min.js"></script>
+  <script>
+    $(function() {
+      $("#removeClientDialog").dialog({
+        modal:true,
+        width:400,
+        height:285,
+        autoOpen:false
+      });
+    });
+    function removeClient(clientId, name) {
+      $("#removeClientDialog").dialog({
+        open: function() {
+          $('#removeClientDialog').html('<p><b>Client id:</b> '+clientId+'</p><p><b>Name:</b> '+name+'</p><p>Are you sure?</p>');
+        },
+        buttons: {
+          "Yes": function() {
+            $(this).dialog("close");
+            location.href='removeclient.php?id='+clientId;
+            return false;
+          },
+          "No": function() {
+            $(this).dialog("close");
+          }
+        }
+      });
+      $("#removeClientDialog").dialog("open");
+    }
+  </script>
 </head>
 
 <body>
@@ -30,8 +62,9 @@ if(!isset($_SESSION['valid'])) {
   <br/>
   <table class="table-fill">
     <thead><tr>
-      <th>Client id</th>
+      <th style="width:90px;">Client id</th>
       <th>Name</th>
+      <th style="width:32px;"></th>
       <th style="width:32px;"></th>
       <th style="width:32px;"></th>
     </tr></thead>
@@ -41,14 +74,16 @@ if(!isset($_SESSION['valid'])) {
         echo '<tr>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['id'].'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['firstname'].' '.$client['lastname'].'</td>';
-        echo '<td><a class="editclient" href="editclient.php?id='.$client['id'].'"><img src="css/img/edit.png"/></td>';
-        echo '<td>remove</td>';
+        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['visits'].'</td>';
+        echo '<td><a class="editclient" href="editclient.php?id='.$client['id'].'"><img src="css/img/edit.png"/></a></td>';
+        echo '<td><a class="removeclient" onclick="removeClient('.$client['id'].',\''.$client['firstname'].' '.$client['lastname'].'\')"><img src="css/img/trash.png"/></a></td>';
         echo '</tr>';
       }
     ?>
     </tbody>
   </table>
 
+  <div id="removeClientDialog" title="Remove client"></div>
 </body>
 </html>
 
