@@ -37,6 +37,7 @@ if(!isset($_SESSION['valid'])) {
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/addclient.css">
   <link rel="stylesheet" href="jquery/jquery-ui.min.css">
+  <link rel="stylesheet" href="css/editclient.css">
 
   <script src="jquery/external/jquery/jquery.js"></script>
   <script src="jquery/jquery-ui.min.js"></script>
@@ -44,6 +45,13 @@ if(!isset($_SESSION['valid'])) {
     $(function() {
       $("#datefrom").datepicker();
       $("#dateto").datepicker();
+
+      var section = $("#section");
+      section.selectmenu({
+        width: 137
+      });
+      section.val('<?php echo $client['section']?>');
+      section.selectmenu("refresh");
     });
   </script>
 </head>
@@ -73,8 +81,11 @@ if(!isset($_SESSION['valid'])) {
             <input value="<?php echo $convertedDateTo?>" class="date" type="text" name="dateto" id="dateto">
             Visits:
             <input value="<?php echo $client['visits']?>" style="width:45px;text-align:center;" type="text" name="visits">
-            Section:
-            <input value="<?php echo $client['section']?>" style="width:79px;text-align:center;" type="text" name="section">
+            <select name="section" id="section">
+                <option value="Нет">Нет</option>
+                <option value="Бокс">Бокс</option>
+                <option value="Тренажеры">Тренажеры</option>
+            </select>
         </div>
 
         <button type="submit" name="Save">Save</button>
