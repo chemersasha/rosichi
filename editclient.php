@@ -1,4 +1,4 @@
-<?php
+<?php header('Content-type: text/html; charset=utf-8');
 require_once('DBManager.php');
 
 session_start();
@@ -17,9 +17,8 @@ if(!isset($_SESSION['valid'])) {
     $newvisits = $_POST['visits'];
     $newsection = $_POST['section'];
 
-    $query = "UPDATE Clients SET = 'Alfred Schmidt', City= 'Frankfurt' WHERE id=1";
     $DBManager->runInsertQuery(
-      "UPDATE Clients SET firstname='$newfirstname', lastname='$newlastname', datefrom='$newdatefrom', dateto='$newdateto', visits='$newvisits', section='$newsection' WHERE id=$newclientid;"
+      "UPDATE clients SET firstname='$newfirstname', lastname='$newlastname', datefrom='$newdatefrom', dateto='$newdateto', visits='$newvisits', section='$newsection' WHERE id=$newclientid;"
     );
     header("Location: viewclient.php?id=".$_POST['clientid']);
     exit();

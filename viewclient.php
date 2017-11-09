@@ -1,4 +1,4 @@
-<?php
+<?php header('Content-type: text/html; charset=utf-8');
 require_once('DBManager.php');
 
 session_start();
@@ -16,7 +16,7 @@ if(!isset($_SESSION['valid'])) {
 ?>
 <html lang = "en">
 <head>
-  <title>Add client</title>
+  <title>View client</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/addclient.css">

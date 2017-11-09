@@ -9,6 +9,10 @@ class DBManager {
     $dbpass = $dbini['dbpass'];
     $dbname = $dbini['dbname'];
     $this->connection = mysqli_connect($dbhost, $dbuser, $dbpass);
+    if (!mysqli_set_charset($this->connection, "utf8")) {
+      $message = "Error for setup charset utf8: ".mysqli_error($this->connection);
+      die($message);
+    }
     mysqli_select_db($this->connection, $dbname);
   }
 
