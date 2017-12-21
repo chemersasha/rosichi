@@ -1,5 +1,6 @@
 <?php header('Content-type: text/html; charset=utf-8');
 require_once('DBManager.php');
+require_once('src/dateconverter.php');
 
 session_start();
 if(!isset($_SESSION['valid'])) {
@@ -63,6 +64,8 @@ if(!isset($_SESSION['valid'])) {
   <table class="table-fill">
     <thead><tr>
       <th>Name</th>
+      <th style="width:100px;">From</th>
+      <th style="width:100px;">To</th>
       <th style="width:32px;"></th>
       <th style="width:32px;"></th>
       <th style="width:32px;"></th>
@@ -72,6 +75,8 @@ if(!isset($_SESSION['valid'])) {
       while ($client = mysqli_fetch_assoc($clients)) {
         echo '<tr>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['firstname'].' '.$client['lastname'].'</td>';
+        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.serverDateToClientDate($client['datefrom']).'</td>';
+        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.serverDateToClientDate($client['dateto']).'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['visits'].'</td>';
         echo '<td><a class="editclient" href="editclient.php?id='.$client['id'].'"><img src="css/img/edit.png"/></a></td>';
         echo '<td><a class="removeclient" onclick="removeClient('.$client['id'].',\''.$client['firstname'].' '.$client['lastname'].'\')"><img src="css/img/trash.png"/></a></td>';

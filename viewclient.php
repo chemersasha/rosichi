@@ -12,18 +12,9 @@ if(!isset($_SESSION['valid'])) {
   $client = mysqli_fetch_array($DBManager->runQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
   $DBManager->closeConnection();
 
-  $convertedBirthday = '';
-  if (!isEmptyDate($client['birthday'])) {
-    $convertedBirthday = date("d/m/Y", strtotime($client['birthday']));
-  }
-  $convertedDateFrom = '';
-  if (!isEmptyDate($client['datefrom'])) {
-    $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));
-  }
-  $convertedDateTo = '';
-  if (!isEmptyDate($client['dateto'])) {
-    $convertedDateTo = date("d/m/Y", strtotime($client['dateto']));
-  }
+  $convertedBirthday = serverDateToClientDate($client['birthday']);
+  $convertedDateFrom = serverDateToClientDate($client['datefrom']);
+  $convertedDateTo = serverDateToClientDate($client['dateto']);
 ?>
 <html lang = "en">
 <head>

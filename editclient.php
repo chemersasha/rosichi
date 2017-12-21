@@ -13,18 +13,9 @@ if(!isset($_SESSION['valid'])) {
     $newclientid = $_POST['clientid'];
     $newfirstname = $_POST['firstname'];
     $newlastname = $_POST['lastname'];
-    $newbirthday = '';
-    if($_POST['birthday'] != '') {
-      $newbirthday = clientDateToServerDate($_POST['birthday']);
-    }
-    $newdatefrom = '';
-    if($_POST['datefrom'] != '') {
-      $newdatefrom = clientDateToServerDate($_POST['datefrom']);
-    }
-    $newdateto = '';
-    if($_POST['dateto'] != '') {
-      $newdateto = clientDateToServerDate($_POST['dateto']);
-    }
+    $newbirthday = clientDateToServerDate($_POST['birthday']);
+    $newdatefrom = clientDateToServerDate($_POST['datefrom']);
+    $newdateto = clientDateToServerDate($_POST['dateto']);
     $newvisits = $_POST['visits'];
     $newsection = $_POST['section'];
 
@@ -38,18 +29,9 @@ if(!isset($_SESSION['valid'])) {
   $client = mysqli_fetch_array($DBManager->runQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
   $DBManager->closeConnection();
 
-  $convertedBirthday = '';
-  if (!isEmptyDate($client['birthday'])) {
-    $convertedBirthday = date("d/m/Y", strtotime($client['birthday']));
-  }
-  $convertedDateFrom = '';
-  if (!isEmptyDate($client['datefrom'])) {
-    $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));
-  }
-  $convertedDateTo = '';
-  if (!isEmptyDate($client['dateto'])) {
-    $convertedDateTo = date("d/m/Y", strtotime($client['dateto']));
-  }
+  $convertedBirthday = serverDateToClientDate($client['birthday']);
+  $convertedDateFrom = serverDateToClientDate($client['datefrom']);
+  $convertedDateTo = serverDateToClientDate($client['dateto']);
 ?>
 <html lang = "en">
 <head>
@@ -88,8 +70,6 @@ if(!isset($_SESSION['valid'])) {
   <div class="form-content">
     <div class="form">
       <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
-        <!-- <div>Client id:</div>
-        <input value="<?php echo $client['id']?>" type="text" disabled> -->
         <input type="hidden" name="clientid" value="<?php echo $client['id']?>">
 
         <div>First name:</div>
