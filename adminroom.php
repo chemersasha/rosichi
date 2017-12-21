@@ -32,7 +32,7 @@ if(!isset($_SESSION['valid'])) {
     function removeClient(clientId, name) {
       $("#removeClientDialog").dialog({
         open: function() {
-          $('#removeClientDialog').html('<p><b>Client id:</b> '+clientId+'</p><p><b>Name:</b> '+name+'</p><p>Are you sure?</p>');
+          $('#removeClientDialog').html('<p><b>Name:</b> '+name+'</p><p>Are you sure?</p>');
         },
         buttons: {
           "Yes": function() {
@@ -62,7 +62,6 @@ if(!isset($_SESSION['valid'])) {
   <br/>
   <table class="table-fill">
     <thead><tr>
-      <th style="width:90px;">Client id</th>
       <th>Name</th>
       <th style="width:32px;"></th>
       <th style="width:32px;"></th>
@@ -72,7 +71,6 @@ if(!isset($_SESSION['valid'])) {
     <?php
       while ($client = mysqli_fetch_assoc($clients)) {
         echo '<tr>';
-        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['id'].'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['firstname'].' '.$client['lastname'].'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['visits'].'</td>';
         echo '<td><a class="editclient" href="editclient.php?id='.$client['id'].'"><img src="css/img/edit.png"/></a></td>';

@@ -1,3 +1,7 @@
+.ui-widget {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
 .form-content {
   width: 560px;
 }

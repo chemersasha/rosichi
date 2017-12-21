@@ -1,5 +1,6 @@
 <?php header('Content-type: text/html; charset=utf-8');
 require_once('DBManager.php');
+require_once('src/dateconverter.php');
 
 session_start();
 if(!isset($_SESSION['valid'])) {
@@ -11,8 +12,18 @@ if(!isset($_SESSION['valid'])) {
   $client = mysqli_fetch_array($DBManager->runQuery("SELECT * FROM clients WHERE id='".$clientid."'"));
   $DBManager->closeConnection();
 
-  $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));
-  $convertedDateTo = date("d/m/Y", strtotime($client['dateto']));
+  $convertedBirthday = '';
+  if (!isEmptyDate($client['birthday'])) {
+    $convertedBirthday = date("d/m/Y", strtotime($client['birthday']));
+  }
+  $convertedDateFrom = '';
+  if (!isEmptyDate($client['datefrom'])) {
+    $convertedDateFrom = date("d/m/Y", strtotime($client['datefrom']));
+  }
+  $convertedDateTo = '';
+  if (!isEmptyDate($client['dateto'])) {
+    $convertedDateTo = date("d/m/Y", strtotime($client['dateto']));
+  }
 ?>
 <html lang = "en">
 <head>
@@ -33,13 +44,13 @@ if(!isset($_SESSION['valid'])) {
     <div class="form">
       <table>
         <tr>
-          <td>CLIENT ID:</td><td><?php echo $client['id']?></td>
-        </tr>
-        <tr>
           <td>FIRST:</td><td><?php echo $client['firstname']?></td>
         </tr>
         <tr>
           <td>LAST NAME:</td><td><?php echo $client['lastname']?></td>
+        </tr>
+        <tr>
+          <td>BIRTHDAY:</td><td><?php echo $convertedBirthday?></td>
         </tr>
         <tr>
           <td>DATE FROM:</td><td><?php echo $convertedDateFrom?></td>
