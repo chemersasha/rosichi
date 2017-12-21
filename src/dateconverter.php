@@ -1,6 +1,6 @@
 <?php
 
-function cl1ientDateToServerDate($date) {
+function clientDateToServerDate($date) {
   $result = "";
   if($date!='') {
     $date_array = explode("/",$date);
