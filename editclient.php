@@ -17,7 +17,7 @@ if(!isset($_SESSION['valid'])) {
     $newdatefrom = clientDateToServerDate($_POST['datefrom']);
     $newdateto = clientDateToServerDate($_POST['dateto']);
     $newvisits = $_POST['visits'];
-    $newsection = $_POST['section'];
+    $newsection = $_POST[$sectionId];
 
     $DBManager->runQuery(
       "UPDATE clients SET firstname='$newfirstname', lastname='$newlastname', birthday='$newbirthday', datefrom='$newdatefrom', dateto='$newdateto', visits='$newvisits', section='$newsection' WHERE id=$newclientid;"
@@ -49,13 +49,6 @@ if(!isset($_SESSION['valid'])) {
       $("#datefrom").datepicker({dateFormat: 'dd/mm/yy'});
       $("#dateto").datepicker({dateFormat: 'dd/mm/yy'});
       $("#birthday").datepicker({changeYear:true, yearRange:"1920:+nn", dateFormat:'dd/mm/yy'});
-
-      var section = $("#section");
-      section.selectmenu({
-        width: 137
-      });
-      section.val('<?php echo $client['section']?>');
-      section.selectmenu("refresh");
     });
   </script>
 </head>
@@ -91,12 +84,10 @@ if(!isset($_SESSION['valid'])) {
           Visits:
           <input value="<?php echo $client['visits']?>" style="width:45px;text-align:center;" type="text" name="visits">
         </div>
+
         <div style="text-align:left;">
-          <select name="section" id="section">
-              <option value="Нет">Нет</option>
-              <option value="Бокс">Бокс</option>
-              <option value="Тренажеры">Тренажеры</option>
-          </select></br>
+          Section:
+          <?php $sectionId='section'; $sectionValue=$client['section']; include('src/views/sections.php'); ?>
         </div>
 
         <button type="submit" name="Save">Save</button>

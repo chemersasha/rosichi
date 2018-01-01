@@ -64,6 +64,7 @@ if(!isset($_SESSION['valid'])) {
   <table class="table-fill">
     <thead><tr>
       <th>Name</th>
+      <th style="width:100px;">Section</th>
       <th style="width:100px;">From</th>
       <th style="width:100px;">To</th>
       <th style="width:32px;"></th>
@@ -75,6 +76,7 @@ if(!isset($_SESSION['valid'])) {
       while ($client = mysqli_fetch_assoc($clients)) {
         echo '<tr>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;">'.$client['firstname'].' '.$client['lastname'].'</td>';
+        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['section'].'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.serverDateToClientDate($client['datefrom']).'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.serverDateToClientDate($client['dateto']).'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['visits'].'</td>';
