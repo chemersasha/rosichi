@@ -21,3 +21,6 @@ a.removeclient img {
   width: 32px;
   cursor: hand;
 }
+button.plus {
+  cursor: hand;
+}

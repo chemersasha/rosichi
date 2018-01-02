@@ -30,6 +30,18 @@ if(!isset($_SESSION['valid'])) {
         autoOpen:false
       });
     });
+    function addVisit(clientId) {
+      $("#client"+clientId+"Visits").html('<img src="css/img/loader.gif" style="height:16px;width:16px;">');
+      $.ajax({
+        type: "POST",
+        url: "src/model/addvisit.php",
+        data: {"clientId":clientId},
+        success: function(responseText) {
+            var data = JSON.parse(responseText);
+            $("#client"+data.clientId+"Visits").html(data.visits+' <button class="plus" onclick="addVisit('+data.clientId+')"><img src="css/img/plus.png"/></button>');
+        }
+      });
+    }
     function removeClient(clientId, name) {
       $("#removeClientDialog").dialog({
         open: function() {
@@ -67,7 +79,7 @@ if(!isset($_SESSION['valid'])) {
       <th style="width:100px;">Section</th>
       <th style="width:100px;">From</th>
       <th style="width:100px;">To</th>
-      <th style="width:32px;"></th>
+      <th style="width:70px;"></th>
       <th style="width:32px;"></th>
       <th style="width:32px;"></th>
     </tr></thead>
@@ -79,7 +91,7 @@ if(!isset($_SESSION['valid'])) {
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['section'].'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.serverDateToClientDate($client['datefrom']).'</td>';
         echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.serverDateToClientDate($client['dateto']).'</td>';
-        echo '<td onclick="location.href=\'viewclient.php?id='.$client['id'].'\'; return false;" class="text-center">'.$client['visits'].'</td>';
+        echo '<td class="text-center"><span id="client'.$client['id'].'Visits">'.$client['visits'].' <button class="plus" onclick="addVisit('.$client['id'].')"><img src="css/img/plus.png"/></button></span></td>';
         echo '<td><a class="editclient" href="editclient.php?id='.$client['id'].'"><img src="css/img/edit.png"/></a></td>';
         echo '<td><a class="removeclient" onclick="removeClient('.$client['id'].',\''.$client['firstname'].' '.$client['lastname'].'\')"><img src="css/img/trash.png"/></a></td>';
         echo '</tr>';
