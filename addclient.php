@@ -67,8 +67,6 @@ if(!isset($_SESSION['valid'])) {
     <div class="form">
       <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post">
         <p class="message"><?php echo $msg; ?></p>
-        <!-- <div style="display:inline-block;">Client id:</div>
-        <input type="text" name="clientid" placeholder="client id" required autofocus></br> -->
         <div style="display:inline-block;">First name:</div>
         <input type="text" name="firstname" placeholder="first name" required></br>
         <div style="display:inline-block;">Last name:</div>

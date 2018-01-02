@@ -1,7 +1,8 @@
 <select name="<?php echo $sectionId ?>" id="<?php echo $sectionId ?>">
     <option value="Нет">Нет</option>
     <option value="Бокс">Бокс</option>
-    <option value="Тренажеры">Тренажеры</option>
+    <option value="Пилатес">Пилатес</option>
+    <option value="Йога">Йога</option>
 </select></br>
 <script>
   $(function() {
