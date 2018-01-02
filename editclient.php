@@ -2,6 +2,8 @@
 require_once('DBManager.php');
 require_once('src/dateconverter.php');
 
+$sectionId='section';
+
 session_start();
 if(!isset($_SESSION['valid'])) {
   echo 'you are not logged';
@@ -87,7 +89,7 @@ if(!isset($_SESSION['valid'])) {
 
         <div style="text-align:left;">
           Section:
-          <?php $sectionId='section'; $sectionValue=$client['section']; include('src/views/sections.php'); ?>
+          <?php $sectionValue=$client['section']; include('src/views/sections.php'); ?>
         </div>
 
         <button type="submit" name="Save">Save</button>

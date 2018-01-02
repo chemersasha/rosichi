@@ -2,6 +2,8 @@
 require_once('DBManager.php');
 require_once('src/dateconverter.php');
 
+$sectionId='section';
+
 session_start();
 if(!isset($_SESSION['valid'])) {
   echo 'you are not logged';
@@ -16,10 +18,17 @@ if(!isset($_SESSION['valid'])) {
     if($_POST['birthday'] != '') {
       $birthday = clientDateToServerDate($_POST['birthday']);
     }
-    // $datefrom = date("Y-m-d", strtotime($_POST['datefrom']));
-    // $dateto = date("Y-m-d", strtotime($_POST['dateto']));
+    $datefrom = '';
+    if($_POST['datefrom'] != '') {
+      $datefrom = clientDateToServerDate($_POST['datefrom']);
+    }
+    $dateto = '';
+    if($_POST['dateto'] != '') {
+      $dateto = clientDateToServerDate($_POST['dateto']);
+    }
+    $section = $_POST[$sectionId];
     $DBManager->runQuery(
-      "INSERT INTO clients (firstname, lastname, birthday) VALUES ('$firstname', '$lastname', '$birthday');"
+      "INSERT INTO clients (firstname, lastname, birthday, datefrom, dateto, section) VALUES ('$firstname', '$lastname', '$birthday', '$datefrom', '$dateto', '$section');"
     );
     //@TODO go to the edit client page
     $DBManager->closeConnection();
@@ -41,6 +50,8 @@ if(!isset($_SESSION['valid'])) {
   <script>
     $(function() {
       $("#birthday").datepicker({changeYear: true, yearRange: "1920:+nn", dateFormat: 'dd/mm/yy'});
+      $("#datefrom").datepicker({dateFormat: 'dd/mm/yy'});
+      $("#dateto").datepicker({dateFormat: 'dd/mm/yy'});
     });
   </script>
 </head>
@@ -66,6 +77,15 @@ if(!isset($_SESSION['valid'])) {
           <div style="display:inline-block;">Birthday:</div>
           <input style="display:inline-block;" class="date" type="text" name="birthday" id="birthday"></br>
         </div>
+        <div style="text-align:left;">
+            Training range:
+            <input class="date" type="text" name="datefrom" id="datefrom"> -
+            <input class="date" type="text" name="dateto" id="dateto">
+        </div>
+        <div style="text-align:left;">
+          Section:
+          <?php include('src/views/sections.php'); ?>
+        </div><br/>
         <button type="submit" name="Add">Add</button>
         <button name="Cancel" onclick="location.href='adminroom.php'; return false;">Cancel</button>
       </form>

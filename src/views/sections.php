@@ -9,7 +9,11 @@
     section.selectmenu({
       width: 137
     });
-    section.val('<?php echo $sectionValue?>');
-    section.selectmenu("refresh");
+    <?php
+      if (isset($sectionValue)) {
+        echo 'section.val("'.$sectionValue.'");';
+        echo 'section.selectmenu("refresh");';
+      }
+    ?>
   });
 </script>
