@@ -17,14 +17,14 @@ if(!isset($_SESSION['valid'])) {
     $whereKeyWord = ' WHERE ';
   }
   if(isset($_GET['firstname']) && mb_strtoupper($_GET['firstname'])!==mb_strtoupper('')) {
-    $queryFirstNameCondition = 'firstname="'.$_GET['firstname'].'"';
+    $queryFirstNameCondition = 'lower(firstname) like "%'.$_GET['firstname'].'%"';
     if(isset($whereKeyWord)) {
       $queryFirstNameCondition = ' AND '.$queryFirstNameCondition;
     }
     $whereKeyWord = ' WHERE ';
   }
   if(isset($_GET['lastname']) && mb_strtoupper($_GET['lastname'])!==mb_strtoupper('')) {
-    $queryLastNameCondition = 'lastname="'.$_GET['lastname'].'"';
+    $queryLastNameCondition = 'lower(lastname) like "%'.$_GET['lastname'].'%"';
     if(isset($whereKeyWord)) {
       $queryLastNameCondition = ' AND '.$queryLastNameCondition;
     }
