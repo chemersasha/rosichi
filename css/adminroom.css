@@ -24,3 +24,20 @@ a.removeclient img {
 button.plus {
   cursor: hand;
 }
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background:#EBEBEB;
+  border: 0;
+  padding: 5px;
+  color: #000000;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #BBBBBB;
+}

@@ -13,6 +13,7 @@ if(!isset($_SESSION['valid'])) {
     "UPDATE clients SET visits=visits+1 WHERE id=$clientid"
   );
   $clients = $DBManager->runQuery("SELECT visits FROM clients WHERE id=$clientid");
+  $DBManager->closeConnection();
   $client = mysqli_fetch_assoc($clients);
   $result = array(
      'clientId' => $clientid,

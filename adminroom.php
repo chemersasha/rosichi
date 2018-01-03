@@ -8,17 +8,57 @@ if(!isset($_SESSION['valid'])) {
 } else {
   $DBManager = new DBManager();
   $DBManager->openConnection();
-  $clients = $DBManager->runQuery("SELECT * FROM clients");
+
+  $queryString = "SELECT * FROM clients";
+  // $whereKeyWord = '';
+  if(isset($_GET['section']) && mb_strtoupper($_GET['section'])!==mb_strtoupper('Все')) {
+    $sectionValue = $_GET['section'];
+    $querySectionCondition = 'section="'.$_GET['section'].'"';
+    $whereKeyWord = ' WHERE ';
+  }
+  if(isset($_GET['firstname']) && mb_strtoupper($_GET['firstname'])!==mb_strtoupper('')) {
+    $queryFirstNameCondition = 'firstname="'.$_GET['firstname'].'"';
+    if(isset($whereKeyWord)) {
+      $queryFirstNameCondition = ' AND '.$queryFirstNameCondition;
+    }
+    $whereKeyWord = ' WHERE ';
+  }
+  if(isset($_GET['lastname']) && mb_strtoupper($_GET['lastname'])!==mb_strtoupper('')) {
+    $queryLastNameCondition = 'lastname="'.$_GET['lastname'].'"';
+    if(isset($whereKeyWord)) {
+      $queryLastNameCondition = ' AND '.$queryLastNameCondition;
+    }
+    $whereKeyWord = ' WHERE ';
+  }
+  if(isset($whereKeyWord)) {
+    $queryString = $queryString.$whereKeyWord;
+  }
+  if(isset($querySectionCondition)) {
+    $queryString = $queryString.$querySectionCondition;
+  }
+  if(isset($queryFirstNameCondition)) {
+    $queryString = $queryString.$queryFirstNameCondition;
+  }
+  if(isset($queryLastNameCondition)) {
+    $queryString = $queryString.$queryLastNameCondition;
+  }
+
+  $clients = $DBManager->runQuery($queryString);
   $DBManager->closeConnection();
 ?>
-<html lang = "en">
+<html lang="en">
 <head>
   <title>Admin room</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/adminroom.css">
   <link rel="stylesheet" href="css/tableList.css">
   <link rel="stylesheet" href="jquery/jquery-ui.min.css">
-
+  <style>
+    .ui-widget {
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+    }
+  </style>
   <script src="jquery/external/jquery/jquery.js"></script>
   <script src="jquery/jquery-ui.min.js"></script>
   <script>
@@ -73,13 +113,36 @@ if(!isset($_SESSION['valid'])) {
     </a>
   </div>
   <br/>
+  <form role="form" class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="get" style="border:black solid 1px;">
+    <table><tr>
+      <td>
+        First name:
+        <input value="<?php if(isset($_GET['firstname'])){ echo $_GET['firstname'];}?>" type="text" name="firstname" placeholder="first name">
+      </td>
+      <td>
+        Last name:
+        <input value="<?php if(isset($_GET['firstname'])){ echo $_GET['lastname'];}?>" type="text" name="lastname" placeholder="last name">
+      </td>
+      <td>
+        Section:
+        <?php
+          $sectionId='section';
+          $items = array('Все');
+          include('src/views/sections.php');
+        ?>
+      </td>
+      <td>
+        <button type="submit">Filter</button>
+      </td></tr>
+    </table>
+  </form>
   <table class="table-fill">
     <thead><tr>
       <th>Name</th>
-      <th style="width:100px;">Section</th>
-      <th style="width:100px;">From</th>
-      <th style="width:100px;">To</th>
-      <th style="width:70px;"></th>
+      <th style="width:100px;text-align:center">Section</th>
+      <th style="width:100px;text-align:center">From</th>
+      <th style="width:100px;text-align:center">To</th>
+      <th style="width:70px;text-align:center">Visits</th>
       <th style="width:32px;"></th>
       <th style="width:32px;"></th>
     </tr></thead>
